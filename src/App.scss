@@ -1,0 +1,77 @@
+@use "./assets/scss/global.scss";
+
+.App{
+
+    h1{
+        background-color: global.$eucalyptus;
+        color: global.$white;
+        font: 400 24px/24px "Public Sans";
+        height: 50px;
+        margin: 0;
+        padding: 13px 22px;
+    }
+
+    main{
+        background-color: global.$pale_teal;
+        border-left: 22px solid global.$jade_green;
+        border-right: 22px solid global.$jade_green;
+        height: 100vh;
+        padding-top: 40px;
+        width: 100%;
+
+       #tile_container{
+            list-style-type: none;
+            margin: 0 auto;
+            padding-left: 0;
+            width: 440px;
+
+            .tile_item{
+                border-radius: 10px;
+                cursor: pointer;
+                display: inline-block;
+                height: 100px;
+                margin: 5px;
+                width: 100px;
+
+                &.empty{
+                    background-color: global.$battleship_grey;
+                }
+
+                &.tilled{
+                    background-color: global.$faded_orange;
+                }
+            }
+            #total_earnings{
+                font: 700 20px/16px "Public Sans";
+                margin-top: 19px;
+                padding-left: 5px;
+            }
+
+            .popover-body{
+                padding: 10px;
+            }
+        } 
+    }
+}
+
+#popover-container{
+
+    button{
+        border-radius: 5px;
+        border: 0;
+        color: global.$white;
+        font: 400 24px/24px "Public Sans";
+        height: 40px;
+        padding: 8px 17px 8px 17px;
+        width: 124px;
+        
+        &.till_button{
+            background-color: global.$bleu_de_france;
+
+            &:hover{
+                background-color: darken(global.$bleu_de_france, 10%);
+            }
+       } 
+    }
+}
+

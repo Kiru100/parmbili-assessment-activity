@@ -1,0 +1,96 @@
+@use "../../assets/scss/global.scss";
+
+#show_plant_modal{
+    width: 300px;
+    text-align: center;
+
+    h2{
+        margin-top: 23px;
+        color: global.$bleu_de_france;
+        font: 700 20px/14px "Public Sans";
+    }
+
+    .close_button{
+        border: none;
+        background-color: transparent;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+
+        .close_icon{
+            height: 10px;
+            width: 10px;
+            display: inline-block;
+            background: url("../../assets/images/close_button.PNG") no-repeat;
+            background-size: 10px 10px;
+        }
+    }
+
+    label{
+        background-color: global.$lavender_pinocchio;
+        border-radius: 10px;
+        cursor: pointer;
+        height: 100px;
+        margin-top: 20px;
+        width: 100px;
+
+        input[type="radio"]{
+            position: fixed;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .crop_informations{
+            margin-bottom: 0;
+            font: 400 12px/10px "Public Sans";
+            color: global.$dune;
+        }
+
+        &:nth-child(odd){
+            margin-right: 20px;
+        }
+
+        .potate_icon{
+            width: fit-content;
+            display: inline-block;
+            background: url("../../assets/images/Potato.svg") no-repeat;
+            background-size: 10px 10px;
+        }
+    }
+
+
+    .action_container{
+        margin-top: 20px;
+        margin-bottom: 4px;
+
+        button{
+            border-radius: 5px;
+            border: none;
+            color: global.$white;
+            font: 400 24px/24px Public Sans;
+            height: 40px;
+            width: 120px;
+
+            &[type="button"]{
+                background-color: global.$battleship_grey;
+
+                &:hover{
+                    background-color: darken(global.$battleship_grey, 10%);
+                }
+            }
+
+            &[type="submit"]{
+                background-color: global.$bleu_de_france;
+
+                &:hover{
+                    background-color: darken(global.$bleu_de_france, 10%);
+                }
+            }
+
+            &:nth-of-type(1){
+                margin-right: 20px ;
+            }
+        }
+    
+    }
+}

@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPlantMode, setPlantTimer, setHarvestMode } from "../../__reducers/tiles.reducer";
 import { reduceTotalEarnings } from "../../__reducers/users.reducer";
 import { PLANT_DATA } from "../../__config/constants";
+import { useState } from "react";
 import "./add_plant.modal.scss";
 
 function PlantModal({set_show, set_hide, selected}){
     const { user_data } = useSelector(state => state.users);
+    const [disable_submit_button, setDisableSubmitButton] = useState(true);
     const dispatch = useDispatch();
 
     const handleSubmit = (event) =>{
@@ -32,6 +34,15 @@ function PlantModal({set_show, set_hide, selected}){
         }
     } 
 
+    const setSelectedPlant = (selected_plant_name) =>{
+        let plant_initial_price = PLANT_DATA[selected_plant_name].initial_price;
+
+        console.log('user_total', user_data.total_earnings, 'plant_initial_price', plant_initial_price);
+        if(user_data.total_earnings >= plant_initial_price){
+            setDisableSubmitButton(false);
+        }
+    }
+
     const showCropData = (crop_name) =>{
         return `${PLANT_DATA[crop_name].growing_time}s / ${PLANT_DATA[crop_name].initial_price}$ / ${PLANT_DATA[crop_name].selling_price}$`
     }
@@ -44,32 +55,32 @@ function PlantModal({set_show, set_hide, selected}){
                     <h2>Select a Crop to Plant</h2>
                     
                     <input id="potato_option"  type="radio" name="plant_name" value="potato"/>
-                    <label htmlFor="potato_option" >
+                    <label htmlFor="potato_option" onClick={()=>setSelectedPlant("potato")}>
                         <span className="potato_icon"></span>
                         <p className="crop_informations">{showCropData("potato")}</p>
                     </label>
 
                     <input id="onion_option" type="radio" name="plant_name" value="onion"/>
-                    <label htmlFor="onion_option">
+                    <label htmlFor="onion_option" onClick={()=>setSelectedPlant("onion")}>
                         <span className="onion_icon"></span>
                         <p className="crop_informations">{showCropData("onion")}</p>
                     </label>
 
                     <input id="carrot_option" type="radio" name="plant_name" value="carrot"/>
-                    <label htmlFor="carrot_option">
+                    <label htmlFor="carrot_option" onClick={()=>setSelectedPlant("carrot")}>
                         <span className="carrot_icon"></span>
                         <p className="crop_informations">{showCropData("carrot")}</p>
                     </label>
 
                     <input id="corn_option" type="radio" name="plant_name" value="corn"/>
-                    <label htmlFor="corn_option">
+                    <label htmlFor="corn_option" onClick={()=>setSelectedPlant("corn")}>
                         <span className="corn_icon"></span>
                         <p className="crop_informations">{showCropData("corn")}</p>
                     </label>
 
                     <div className="action_container">
                         <button type="button" onClick={set_hide}>Cancel</button>
-                        <button type="submit">Plant</button>
+                        <button type="submit" disabled={disable_submit_button}>Plant</button>
                     </div>
                 </form>
             </Modal.Body>

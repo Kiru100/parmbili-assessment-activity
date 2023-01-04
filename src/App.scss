@@ -34,6 +34,30 @@
             .popover-body{
                 padding: 10px;
             }
+
+            #expand_land_button{
+                background-color: global.$curious_blue;
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+                height: 60px;
+                width: 210px;   
+
+                &:hover{
+                    background-color:darken(global.$curious_blue, 10%);
+                }
+                
+                &:disabled, &:disabled:hover{
+                    background-color:global.$curious_blue;
+                    opacity: 80%;
+                }
+
+                span{
+                    color: global.$white;
+                    display: block;
+                    font: 700 16px/18px "Inter";
+                }
+            }
         } 
     }
 }

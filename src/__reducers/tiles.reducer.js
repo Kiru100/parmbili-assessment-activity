@@ -55,8 +55,15 @@ export const tiles = createSlice({
             const {index, mode} = action.payload;
             state.selected_tile = {index: index, mode: mode};
         },
+        expandTiles:(state, action)=>{
+            const { to_add } = action.payload;
+
+            for( let add_tile_index = 0; add_tile_index < to_add; add_tile_index++){
+                state.tiles_list.push({ mode:"empty" });
+            }
+        }
     }
 });
 
-export const { setTillMode, setSelectedTile, setPlantMode, setPlantTimer, setHarvestMode, setEmptyMode} = tiles.actions;
+export const { setTillMode, setSelectedTile, setPlantMode, setPlantTimer, setHarvestMode, setEmptyMode, expandTiles} = tiles.actions;
 export default tiles.reducer;

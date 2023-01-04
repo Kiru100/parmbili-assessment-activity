@@ -107,6 +107,11 @@
                 &:hover{
                     background-color: darken(global.$bleu_de_france, 10%);
                 }
+
+                &:disabled, &:disabled:hover{
+                    background-color: global.$bleu_de_france;
+                    opacity: 80%;
+                }
             }
 
             &:nth-of-type(1){

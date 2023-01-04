@@ -8,7 +8,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setTillMode, setEmptyMode } from "./__reducers/tiles.reducer";
 import { addTotalEarnings } from './__reducers/users.reducer';
 import { PLANT_DATA } from './__config/constants';
-import PlantModal from "./modals/plant_modal/plant_modal";
+import PlantModal from "./modals/add_plant/add_plant.modal";
+import RemovePlant from './modals/remove_plant/remove_plant.modal';
 
 function App() {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function App() {
 
     const [show_overlay, setShowOverlay] = useState(false);
     const [show_plant_modal, setShowPlantModal] = useState(false);
+    const [show_remove_plant_modal, setshowRemovePlantModal] = useState(true);
 
     const [overlay_target, setOverlayTarget] = useState(null);
 
@@ -36,6 +38,11 @@ function App() {
 
     const showPlantCropModal = (event)=>{
         setShowPlantModal(true);
+        setShowOverlay(false);
+    }
+
+    const showRemoveCropModal = (event) =>{
+        setshowRemovePlantModal(true);
         setShowOverlay(false);
     }
 
@@ -71,7 +78,8 @@ function App() {
                     </ul>
                 </main>
             </div>
-
+            
+            <RemovePlant set_show={show_remove_plant_modal}/>
             <PlantModal set_show={show_plant_modal} set_hide={()=>setShowPlantModal(false)} selected={selected_tile}/>
             <Overlay
                 show={show_overlay}
@@ -82,13 +90,14 @@ function App() {
                     <Popover.Body>
                         {selected_tile.mode === "empty" ? <button className="overlay_button" onClick={tillTile}>Till</button> : ""}
                         {selected_tile.mode === "tilled" ? <button className="overlay_button" onClick={showPlantCropModal}>Plant</button> : ""}
-                        {selected_tile.mode === "planted" ? <button className="overlay_button remove" onClick={removeCrop}>Remove</button> : ""}
+                        {selected_tile.mode === "planted" ? <button className="overlay_button remove" onClick={showRemoveCropModal}>Remove</button> : ""}
                         {selected_tile.mode === "harvest" ? 
                             <React.Fragment>
                                 <button className="overlay_button" onClick={harvestCrop}>Harvest</button> 
-                                <button className="overlay_button remove" onClick={removeCrop}>Remove</button>
+                                <button className="overlay_button remove" onClick={showRemoveCropModal}>Remove</button>
                             </React.Fragment>
-                            : ""}
+                            : ""
+                        }
                     </Popover.Body>
                 </Popover>
             </Overlay>

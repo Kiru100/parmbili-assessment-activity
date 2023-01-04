@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPlantMode, setPlantTimer, setHarvestMode } from "../../__reducers/tiles.reducer";
 import { reduceTotalEarnings } from "../../__reducers/users.reducer";
 import { PLANT_DATA } from "../../__config/constants";
-import "./plant_modal.scss";
+import "./add_plant.modal.scss";
 
 function PlantModal({set_show, set_hide, selected}){
     const { user_data } = useSelector(state => state.users);
@@ -32,7 +32,7 @@ function PlantModal({set_show, set_hide, selected}){
         }
     } 
 
-    const show_crop_data = (crop_name) =>{
+    const showCropData = (crop_name) =>{
         return `${PLANT_DATA[crop_name].growing_time}s / ${PLANT_DATA[crop_name].initial_price}$ / ${PLANT_DATA[crop_name].selling_price}$`
     }
 
@@ -46,25 +46,25 @@ function PlantModal({set_show, set_hide, selected}){
                     <input id="potato_option"  type="radio" name="plant_name" value="potato"/>
                     <label htmlFor="potato_option" >
                         <span className="potato_icon"></span>
-                        <p className="crop_informations">{show_crop_data("potato")}</p>
+                        <p className="crop_informations">{showCropData("potato")}</p>
                     </label>
 
                     <input id="onion_option" type="radio" name="plant_name" value="onion"/>
                     <label htmlFor="onion_option">
                         <span className="onion_icon"></span>
-                        <p className="crop_informations">{show_crop_data("onion")}</p>
+                        <p className="crop_informations">{showCropData("onion")}</p>
                     </label>
 
                     <input id="carrot_option" type="radio" name="plant_name" value="carrot"/>
                     <label htmlFor="carrot_option">
                         <span className="carrot_icon"></span>
-                        <p className="crop_informations">{show_crop_data("carrot")}</p>
+                        <p className="crop_informations">{showCropData("carrot")}</p>
                     </label>
 
                     <input id="corn_option" type="radio" name="plant_name" value="corn"/>
                     <label htmlFor="corn_option">
                         <span className="corn_icon"></span>
-                        <p className="crop_informations">{show_crop_data("corn")}</p>
+                        <p className="crop_informations">{showCropData("corn")}</p>
                     </label>
 
                     <div className="action_container">

@@ -1,0 +1,57 @@
+@use "../../assets/scss/global.scss";
+
+#remove_plant_modal{
+    text-align: center;
+    width: 320px;
+    
+    .modal-body{
+        padding: 20px 26px;
+
+
+        h2{
+            font: 700 20px/20px "Public Sans";
+            color: global.$valentine_red;
+        }
+
+        p{  
+            font: 400 16px/20px "Public Sans";
+            margin: 17px auto 20px;
+            width: 166px;
+            height: 40px;
+        }
+
+        .action_container{
+            display: flex;
+            justify-content: space-between;
+
+            button{
+                font: 400 24px/24px "Public Sans";
+                color: global.$white;
+                border: none;
+                border-radius: 5px;
+                width: 124px;
+                height: 40px;
+
+
+                &.cancel_button{
+                    background-color: global.$valentine_red;
+
+                    &:hover{
+                        background-color:  darken(global.$valentine_red, 10%);
+                    }
+                }   
+
+                &.remove_button{
+                    background-color: global.$battleship_grey;
+
+                    &:hover{
+                        background-color:  darken(global.$battleship_grey, 10%);
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    
+}

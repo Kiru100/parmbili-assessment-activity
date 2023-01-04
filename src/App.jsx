@@ -5,7 +5,7 @@ import Overlay from 'react-bootstrap/Overlay';
 import Popover from 'react-bootstrap/Popover';
 import TileItem from './components/tile_item';
 import { useSelector, useDispatch } from 'react-redux';
-import { setMode } from "./__reducers/tiles.reducer";
+import { setTillMode } from "./__reducers/tiles.reducer";
 import PlantModal from "./modals/plant_modal/plant_modal";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
     const { tiles_list, selected_tile } = useSelector(state => state.tiles);
 
     const [show_overlay, setShowOverlay] = useState(false);
-    const [show_plant_modal, setShowPlantModal] = useState(true);
+    const [show_plant_modal, setShowPlantModal] = useState(false);
 
     const [overlay_target, setOverlayTarget] = useState(null);
 
@@ -27,7 +27,7 @@ function App() {
     };
 
     const tillTile = (event) =>{
-        dispatch(setMode({tile_index: selected_tile.index, tile_mode: "tilled"}));
+        dispatch(setTillMode({tile_index: selected_tile.index}));
         setShowOverlay(false);
     }
 
@@ -56,7 +56,7 @@ function App() {
                 </main>
             </div>
 
-            <PlantModal set_show={show_plant_modal} set_hide={()=>setShowPlantModal(false)}/>
+            <PlantModal set_show={show_plant_modal} set_hide={()=>setShowPlantModal(false)} selected={selected_tile}/>
             <Overlay
                 show={show_overlay}
                 target={overlay_target}

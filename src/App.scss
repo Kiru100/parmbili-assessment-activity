@@ -25,22 +25,6 @@
             padding-left: 0;
             width: 440px;
 
-            .tile_item{
-                border-radius: 10px;
-                cursor: pointer;
-                display: inline-block;
-                height: 100px;
-                margin: 5px;
-                width: 100px;
-
-                &.empty{
-                    background-color: global.$battleship_grey;
-                }
-
-                &.tilled{
-                    background-color: global.$faded_orange;
-                }
-            }
             #total_earnings{
                 font: 700 20px/16px "Public Sans";
                 margin-top: 19px;

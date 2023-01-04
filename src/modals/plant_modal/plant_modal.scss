@@ -26,19 +26,22 @@
         }
     }
 
+    input[type="radio"]{
+        display: none;
+
+        &:checked + label {
+            background-color: global.$saffron-mango;
+        }
+    }
+
     label{
         background-color: global.$lavender_pinocchio;
+        vertical-align: top;
         border-radius: 10px;
         cursor: pointer;
         height: 100px;
-        margin-top: 20px;
+        margin: 20px 10px 0;
         width: 100px;
-
-        input[type="radio"]{
-            position: fixed;
-            opacity: 0;
-            pointer-events: none;
-        }
 
         .crop_informations{
             margin-bottom: 0;
@@ -46,15 +49,34 @@
             color: global.$dune;
         }
 
-        &:nth-child(odd){
-            margin-right: 20px;
-        }
-
-        .potate_icon{
-            width: fit-content;
+        span{
+            margin-top: 15px;
             display: inline-block;
-            background: url("../../assets/images/Potato.svg") no-repeat;
-            background-size: 10px 10px;
+
+            &.potato_icon{
+                margin-top: 12px;
+                width: 70px;
+                height: 60px;
+                background: url("../../assets/images/Potato.svg") no-repeat;
+            }
+    
+            &.onion_icon{
+                width: 50px;
+                height: 55px;
+                background: url("../../assets/images/Onion.svg") no-repeat;
+            }
+
+            &.carrot_icon{
+                width: 23px;
+                height: 60px;
+                background: url("../../assets/images/Carrot.svg") no-repeat;
+            }
+
+            &.corn_icon{
+                width: 43px;
+                height: 60px;
+                background: url("../../assets/images/Corn.svg") no-repeat;
+            }
         }
     }
 

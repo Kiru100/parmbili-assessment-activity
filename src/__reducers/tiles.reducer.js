@@ -31,11 +31,21 @@ export const tiles = createSlice({
             const { tile_index } = action.payload;
             state.tiles_list[tile_index].mode = "tilled";
         },
+        setEmptyMode:(state, action) =>{
+            const { tile_index } = action.payload;
+            state.tiles_list[tile_index].mode = "empty";
+        },
         setPlantMode:(state, action) =>{
             const { tile_index, plant_name } = action.payload;
 
             state.tiles_list[tile_index].mode = "planted";
             state.tiles_list[tile_index].plant_name = plant_name;
+        },
+        setHarvestMode:(state, action)=>{
+            const { tile_index } = action.payload;
+            if(state.tiles_list[tile_index].mode === "planted"){
+                state.tiles_list[tile_index].mode = "harvest";
+            }
         },
         setPlantTimer:(state, action)=>{
             const {tile_index ,time_left} = action.payload;
@@ -48,5 +58,5 @@ export const tiles = createSlice({
     }
 });
 
-export const { setTillMode, setSelectedTile, setPlantMode, setPlantTimer} = tiles.actions;
+export const { setTillMode, setSelectedTile, setPlantMode, setPlantTimer, setHarvestMode, setEmptyMode} = tiles.actions;
 export default tiles.reducer;

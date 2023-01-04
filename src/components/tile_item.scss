@@ -22,12 +22,25 @@
         background-color: global.$saffron-mango;
     }
 
+    &.harvest{
+        background-color: global.$eucalyptus;
+    }
+
+    span.time_left{
+        font: 400 14px/10px "Public Sans";
+        color: global.$dune;
+    }
+
+    span.crop_value{
+        font: 400 14px/10px "Public Sans";
+        color: global.$white;
+    }   
+
     span.icon{
         display: block;
         margin: 15px auto 0;
 
         &.potato_icon{
-            // margin-top: 12px;
             width: 70px;
             height: 60px;
             background: url("../assets/images/Potato.svg") no-repeat;

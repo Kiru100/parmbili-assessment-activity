@@ -44,18 +44,31 @@
         border-radius: 5px;
         border: 0;
         color: global.$white;
+        display: block;
         font: 400 24px/24px "Public Sans";
         height: 40px;
         padding: 8px 17px 8px 17px;
         width: 124px;
         
-        &.till_button{
+        &.overlay_button{
             background-color: global.$bleu_de_france;
 
             &:hover{
                 background-color: darken(global.$bleu_de_france, 10%);
             }
+
+            &.remove{
+                background-color: global.$liver;
+
+                &:hover{
+                    background-color: darken(global.$liver, 10%);
+                }
+            }
        } 
+    }
+
+    button + button{
+        margin-top: 10px;
     }
 }
 

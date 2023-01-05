@@ -8,6 +8,10 @@ Plant and harvest crops then expand land.
 ## Aha! Moments
 
 * It's possible to use clearInterval() in reducers given an interval ID.
-* It's possible to manipulate disabled properties of a button with CSS only.
+* It's possible to change :disabled properties of a button without adding new class (new for me).
 
 ## Challenges Encountered
+
+* Error: "A non-serializable value was detected in the state".
+    - I tried passing event object in redux but it returns this error.
+    - Fixed by moving it to regular useState.

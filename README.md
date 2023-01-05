@@ -25,4 +25,4 @@ Plant and harvest crops then expand land.
     * **Fixed** by adding interval ID to tile's state then use clearInterval when remove button is clicked.
     
 ## Youtube Demo Link :link:
-*https://www.youtube.com/watch?v=U1T_J6Odoqg
+* https://www.youtube.com/watch?v=U1T_J6Odoqg

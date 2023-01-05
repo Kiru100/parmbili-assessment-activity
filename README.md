@@ -21,7 +21,7 @@ Plant and harvest crops then expand land.
     * **Fixed** by moving setInterval to component.
     
 * Stopping setInterval that was initiated inside Add Modal.
-    * At first I didn't know clearInterval can be called anywhere (including redux reducers) which gave me hard time trying other stuff which doesn't work because setInterval has it's own world and states don't updated inside it.
+    * At first I didn't know clearInterval can be called anywhere (including redux reducers) which gave me hard time trying other stuff which doesn't work because setInterval has it's own world and states don't update inside it.
     * **Fixed** by adding interval ID to tile's state then use clearInterval when remove button is clicked.
     
 ## Youtube Demo Link :link:

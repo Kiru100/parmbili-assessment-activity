@@ -1,4 +1,4 @@
-# Parmbili Assesment Activity
+# Parmbili Assesment Activity 🧑‍🌾
 
 Very simple app based from old game named farmville.
 Plant and harvest crops then expand land.
@@ -24,4 +24,5 @@ Plant and harvest crops then expand land.
     * At first I didn't know clearInterval can be called anywhere (including redux reducers) which gave me hard time trying other stuff which doesn't work because setInterval has it's own world and states don't updated inside it.
     * **Fixed** by adding interval ID to tile's state then use clearInterval when remove button is clicked.
     
-## Youtube Link :link:
+## Youtube Demo Link :link:
+*https://www.youtube.com/watch?v=U1T_J6Odoqg

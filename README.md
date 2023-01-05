@@ -7,5 +7,7 @@ Plant and harvest crops then expand land.
 
 ## Aha! Moments
 
+* It's possible to use clearInterval() in reducers given an interval ID.
+* It's possible to manipulate disabled properties of a button with CSS only.
 
 ## Challenges Encountered

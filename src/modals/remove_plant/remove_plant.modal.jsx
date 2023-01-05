@@ -6,10 +6,15 @@ import "./remove_plant.modal.scss";
 function RemovePlant({set_show, set_hide, selected}){
     const dispatch = useDispatch();
 
+    /**
+    * DOCU: Set selected tile to empty mode then set modal show to false. <br>
+    * Triggered: When form is submitted/ Remove button is clicked. <br>
+    * @author Noel
+    */
     const handleSubmit = (event) =>{
         event.preventDefault();
-        set_hide();
         dispatch(setEmptyMode({tile_index: selected.index}));
+        set_hide();
     }
 
     return(

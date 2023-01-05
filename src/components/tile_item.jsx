@@ -6,7 +6,13 @@ import React from "react";
 
 function TileItem({data, toggle_overlay, tile_index}){
     const dispatch = useDispatch();
-    
+
+    /**
+    * DOCU: When a tile is clicked, the tile's index and mode are set to the selected tile, 
+    * and the overlay is toggled.
+    * @param {event} object - event object from clicked Tile.
+    * @author Noel
+    */
     const handleTileClick = (event) =>{
         dispatch(setSelectedTile({index: tile_index, mode: data.mode}));
         toggle_overlay(event);
@@ -23,7 +29,7 @@ function TileItem({data, toggle_overlay, tile_index}){
                         <span className="crop_value">{`${PLANT_DATA[data.plant_name].selling_price}$`}</span>
                     }
                 </React.Fragment>
-            :   ""
+                :""
             }
         </li>
     )

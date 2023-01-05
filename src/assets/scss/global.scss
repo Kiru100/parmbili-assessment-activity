@@ -1,5 +1,6 @@
 $battleship_grey: #828282;
 $bleu_de_france: #2f80ed;
+$curious_blue: #2d9cdb;
 $dune: #333;
 $eucalyptus: #219653;
 $faded_orange: #f2994a;
@@ -10,7 +11,10 @@ $pale_teal: #6fcf97;
 $saffron-mango: #f2c94c;
 $valentine_red: #eb5757;
 $white: #fff;
-$curious_blue: #2d9cdb;
 
-
+@mixin icon($url, $height, $width){
+    background: url($url) no-repeat;
+    height: $height;
+    width: $width;
+}
 

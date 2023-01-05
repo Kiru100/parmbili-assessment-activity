@@ -30,34 +30,35 @@ function App() {
         setOverlayTarget(event.target);
     };
 
-    const tillTile = (event) =>{
+    const tillTile = () =>{
         dispatch(setTillMode({tile_index: selected_tile.index}));
         setShowOverlay(false);
     }
 
-    const showPlantCropModal = (event)=>{
+    const showPlantCropModal = ()=>{
         setShowPlantModal(true);
         setShowOverlay(false);
     }
 
-    const showRemoveCropModal = (event) =>{
+    const showRemoveCropModal = () =>{
         setShowRemovePlantModal(true);
         setShowOverlay(false);
     }
 
-    const harvestCrop = (event) =>{
+    const harvestCrop = () =>{
         const plant_name = tiles_list[selected_tile.index].plant_name;
         const selling_price = PLANT_DATA[plant_name].selling_price;
-
         dispatch(addTotalEarnings({earning_value: selling_price}));
         dispatch(setEmptyMode({tile_index: selected_tile.index}));
         setShowOverlay(false);
     }
 
-    const expandArea = (event) =>{
+    const expandArea = () =>{
         const tile_to_add = TILE_EXPANSION_VALUE[user_data.level+1].to_add;
-        console.log(tile_to_add);
-        dispatch(addUserLevel());
+        const expense_value = TILE_EXPANSION_VALUE[user_data.level+1].price;
+
+        console.log(tile_to_add, expense_value);
+        dispatch(addUserLevel({expansion_price: expense_value}));
         dispatch(expandTiles({to_add: tile_to_add}));
     }
 
@@ -81,7 +82,8 @@ function App() {
                                 className="active" 
                                 type="button" 
                                 onClick={expandArea} 
-                                disabled={ user_data.total_earnings >= TILE_EXPANSION_VALUE[user_data.level+1].price ? false : true}>
+                                disabled={ user_data.total_earnings >= TILE_EXPANSION_VALUE[user_data.level+1].price ? false : true}
+                                >
                                 <span>Expand Land to {TILE_EXPANSION_VALUE[user_data.level+1].size} x {TILE_EXPANSION_VALUE[user_data.level+1].size}</span>
                                 <span>{TILE_EXPANSION_VALUE[user_data.level+1].price}$</span>
                             </button>

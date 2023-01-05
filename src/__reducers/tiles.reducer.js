@@ -1,9 +1,9 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const tiles = createSlice({
     name:"tiles",
     initialState:{
-        selected_tile:{index:0, mode:"empty"},
+        selected_tile:{index: 0, mode:"empty"},
         tiles_list:[
             { mode:"empty" },
             { mode:"empty" },
@@ -33,7 +33,8 @@ export const tiles = createSlice({
         },
         setEmptyMode:(state, action) =>{
             const { tile_index } = action.payload;
-            state.tiles_list[tile_index].mode = "empty";
+            clearInterval(state.tiles_list[tile_index].interval_id);
+            state.tiles_list[tile_index] = { mode:"empty" };
         },
         setPlantMode:(state, action) =>{
             const { tile_index, plant_name } = action.payload;
@@ -43,13 +44,15 @@ export const tiles = createSlice({
         },
         setHarvestMode:(state, action)=>{
             const { tile_index } = action.payload;
+        
             if(state.tiles_list[tile_index].mode === "planted"){
                 state.tiles_list[tile_index].mode = "harvest";
             }
         },
         setPlantTimer:(state, action)=>{
-            const {tile_index ,time_left} = action.payload;
+            const {tile_index,time_left , interval_id} = action.payload;
             state.tiles_list[tile_index].time_left = time_left;
+            state.tiles_list[tile_index].interval_id = interval_id;
         },
         setSelectedTile:(state, action)=>{
             const {index, mode} = action.payload;

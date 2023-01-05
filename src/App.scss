@@ -1,6 +1,10 @@
 @use "./assets/scss/global.scss";
 
 .App{
+    background-color: global.$pale_teal;
+    border-left: 22px solid global.$jade_green;
+    border-right: 22px solid global.$jade_green;
+    min-height: 100vh;
 
     h1{
         background-color: global.$eucalyptus;
@@ -12,18 +16,14 @@
     }
 
     main{
-        background-color: global.$pale_teal;
-        border-left: 22px solid global.$jade_green;
-        border-right: 22px solid global.$jade_green;
-        height: 100vh;
-        padding-top: 40px;
+        padding: 40px 0 40px;
         width: 100%;
 
        #tile_container{
             list-style-type: none;
             margin: 0 auto;
             padding-left: 0;
-            width: 440px;
+            width: 440px; 
 
             #total_earnings{
                 font: 700 20px/16px "Public Sans";

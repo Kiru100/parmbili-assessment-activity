@@ -9,15 +9,15 @@
 
 
         h2{
-            font: 700 20px/20px "Public Sans";
             color: global.$valentine_red;
+            font: 700 20px/20px "Public Sans";
         }
 
         p{  
             font: 400 16px/20px "Public Sans";
+            height: 40px;
             margin: 17px auto 20px;
             width: 166px;
-            height: 40px;
         }
 
         .action_container{
@@ -25,12 +25,12 @@
             justify-content: space-between;
 
             button{
-                font: 400 24px/24px "Public Sans";
-                color: global.$white;
-                border: none;
                 border-radius: 5px;
-                width: 124px;
+                border: none;
+                color: global.$white;
+                font: 400 24px/24px "Public Sans";
                 height: 40px;
+                width: 124px;
 
 
                 &.cancel_button{

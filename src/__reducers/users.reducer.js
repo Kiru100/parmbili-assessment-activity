@@ -1,23 +1,24 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const users = createSlice({
     name:"users",
     initialState:{
-        user_data:{ total_earnings: 180, level: 0 }
+        user_data:{ total_earnings: 50, level: 0 }
     },
     reducers:{
-       addTotalEarnings:(state, action)=>{
+        addTotalEarnings:(state, action)=>{
             const { earning_value } = action.payload;
             state.user_data.total_earnings += earning_value;
-       },
-       reduceTotalEarnings:(state, action)=>{
+        },
+        reduceTotalEarnings:(state, action)=>{
             const { expense_value } = action.payload;
             state.user_data.total_earnings -= expense_value;
-       },
-       addUserLevel:(state, action)=>{
+        },
+        addUserLevel:(state, action)=>{
+            const { expansion_price } = action.payload;
             state.user_data.level += 1;
-       }
-
+            state.user_data.total_earnings -= expansion_price;
+        }
     }
 });
 

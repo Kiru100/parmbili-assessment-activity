@@ -6,9 +6,9 @@
     display: inline-block;
     height: 100px;
     margin: 5px;
+    text-align: center;
     vertical-align: top;
     width: 100px;
-    text-align: center;
 
     &.empty{
         background-color: global.$battleship_grey;
@@ -27,13 +27,13 @@
     }
 
     span.time_left{
-        font: 400 14px/10px "Public Sans";
         color: global.$dune;
+        font: 400 14px/10px "Public Sans";
     }
 
     span.crop_value{
-        font: 400 14px/10px "Public Sans";
         color: global.$white;
+        font: 400 14px/10px "Public Sans";
     }   
 
     span.icon{
@@ -41,27 +41,19 @@
         margin: 15px auto 0;
 
         &.potato_icon{
-            width: 70px;
-            height: 60px;
-            background: url("../assets/images/Potato.svg") no-repeat;
+            @include global.icon("../assets/images/Potato.svg", 60px, 70px);
         }
 
         &.onion_icon{
-            width: 50px;
-            height: 55px;
-            background: url("../assets/images/Onion.svg") no-repeat;
+            @include global.icon("../assets/images/Onion.svg", 55px, 55px);
         }
 
         &.carrot_icon{
-            width: 23px;
-            height: 60px;
-            background: url("../assets/images/Carrot.svg") no-repeat;
+            @include global.icon("../assets/images/Carrot.svg", 60px, 23px);
         }
 
         &.corn_icon{
-            width: 43px;
-            height: 60px;
-            background: url("../assets/images/Corn.svg") no-repeat;
+            @include global.icon("../assets/images/Corn.svg", 60px, 43px);
         }
     }
 }

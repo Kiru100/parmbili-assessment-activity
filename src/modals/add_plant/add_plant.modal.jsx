@@ -13,44 +13,51 @@ function PlantModal({set_show, set_hide, selected}){
 
     const handleSubmit = (event) =>{
         event.preventDefault();
+        closeModal();
         let plant_name = event.target.plant_name.value;
         let plant_time = PLANT_DATA[plant_name].growing_time;
         let plant_initial_price = PLANT_DATA[plant_name].initial_price;
 
         if(event.target.plant_name.value && selected.mode === "tilled" && user_data.total_earnings >= plant_initial_price){
-            dispatch(setPlantMode({tile_index: selected.index, plant_name: plant_name}));
+            dispatch(setPlantMode({tile_index: selected.index, plant_name: plant_name, mode: "planted"}));
             dispatch(reduceTotalEarnings({expense_value: plant_initial_price}));
             set_hide(); 
             
             const intervalID = setInterval(() => {
-                dispatch(setPlantTimer({tile_index: selected.index, time_left: plant_time}));
+                dispatch(setPlantTimer({tile_index: selected.index, time_left: plant_time, interval_id: intervalID}));
                 plant_time--;
 
                 if(plant_time < 0){
                     clearInterval(intervalID);
                     dispatch(setHarvestMode({tile_index: selected.index}));
                 }
-            }, 1000);
+            }, 1000, ()=>{console.log('ello')});
         }
     } 
 
     const setSelectedPlant = (selected_plant_name) =>{
         let plant_initial_price = PLANT_DATA[selected_plant_name].initial_price;
 
-        console.log('user_total', user_data.total_earnings, 'plant_initial_price', plant_initial_price);
         if(user_data.total_earnings >= plant_initial_price){
             setDisableSubmitButton(false);
+        }else if(user_data.total_earnings <= plant_initial_price){
+            setDisableSubmitButton(true);
         }
     }
 
+    const closeModal = () =>{
+        setDisableSubmitButton(true);
+        set_hide();
+    }
+
     const showCropData = (crop_name) =>{
-        return `${PLANT_DATA[crop_name].growing_time}s / ${PLANT_DATA[crop_name].initial_price}$ / ${PLANT_DATA[crop_name].selling_price}$`
+        return `${PLANT_DATA[crop_name].growing_time}s / ${PLANT_DATA[crop_name].initial_price}$ / ${PLANT_DATA[crop_name].selling_price}$`;
     }
 
     return(
         <Modal id="show_plant_modal" show={set_show} centered>
             <Modal.Body>
-                <button className="close_button" type="button" onClick={set_hide}><span className="close_icon"></span></button>
+                <button className="close_button" type="button" onClick={closeModal}><span className="close_icon"></span></button>
                 <form onSubmit={handleSubmit}>
                     <h2>Select a Crop to Plant</h2>
                     
@@ -79,7 +86,7 @@ function PlantModal({set_show, set_hide, selected}){
                     </label>
 
                     <div className="action_container">
-                        <button type="button" onClick={set_hide}>Cancel</button>
+                        <button type="button" onClick={closeModal}>Cancel</button>
                         <button type="submit" disabled={disable_submit_button}>Plant</button>
                     </div>
                 </form>

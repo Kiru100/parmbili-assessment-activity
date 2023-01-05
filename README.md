@@ -3,7 +3,7 @@
 Very simple app based from old game named farmville.
 Plant and harvest crops then expand land.
 
-![](https://github.com/v88-noel/parmbili-assessment-activity/issues/1#issue-1520171619)
+![Parmbili App](https://user-images.githubusercontent.com/119291271/210716645-8da85889-74f5-4679-9899-b9a085594f05.gif)
 
 ## Aha! Moments
 

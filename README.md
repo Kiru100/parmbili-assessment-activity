@@ -1,4 +1,4 @@
-# Parmbili Assesment Activity 🧑‍🌾
+# Parmbili Assessment Activity 🧑‍🌾
 
 Very simple app based from old game named farmville.
 Plant and harvest crops then expand land.

@@ -1,6 +1,6 @@
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { setEmptyMode } from "../../__reducers/tiles.reducer";
+import { setEmptyMode } from "../../reducers/tiles.reducer";
 import "./remove_plant.modal.scss";
 
 function RemovePlant({set_show, set_hide, selected}){

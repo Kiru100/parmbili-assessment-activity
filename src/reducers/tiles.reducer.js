@@ -52,7 +52,7 @@ export const tiles = createSlice({
                 state.tiles_list[tile_index].mode = "harvest";
             }
         },
-        /* Changes tile mode to harvest if previous mode is planted. */
+        /* Add timer to plant */
         setPlantTimer:(state, action)=>{
             const {tile_index,time_left , interval_id} = action.payload;
             state.tiles_list[tile_index].time_left = time_left;

@@ -1,12 +1,12 @@
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { setPlantMode, setPlantTimer, setHarvestMode } from "../../__reducers/tiles.reducer";
-import { reduceTotalEarnings } from "../../__reducers/users.reducer";
-import { PLANT_DATA } from "../../__config/constants";
+import { setPlantMode, setPlantTimer, setHarvestMode } from "../../reducers/tiles.reducer";
+import { reduceTotalEarnings } from "../../reducers/users.reducer";
+import { PLANT_DATA } from "../../config/constants";
 import { useState } from "react";
 import "./add_plant.modal.scss";
 
-function PlantModal({set_show, set_hide, selected}){
+function AddPlant({set_show, set_hide, selected}){
     const { user_data } = useSelector(state => state.users);
     const [disable_submit_button, setDisableSubmitButton] = useState(true);
     const dispatch = useDispatch();
@@ -125,4 +125,4 @@ function PlantModal({set_show, set_hide, selected}){
     )
 }
 
-export default PlantModal;
+export default AddPlant;

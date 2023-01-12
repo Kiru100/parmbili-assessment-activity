@@ -1,8 +1,8 @@
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { setPlantMode, setPlantTimer, setHarvestMode } from "../../reducers/tiles.reducer";
-import { reduceTotalEarnings } from "../../reducers/users.reducer";
-import { PLANT_DATA } from "../../config/constants";
+import { setPlantMode, setPlantTimer, setHarvestMode } from "../../../reducers/tiles.reducer";
+import { reduceTotalEarnings } from "../../../reducers/users.reducer";
+import { PLANT_DATA } from "../../../config/constants";
 import { useState } from "react";
 import "./add_plant.modal.scss";
 

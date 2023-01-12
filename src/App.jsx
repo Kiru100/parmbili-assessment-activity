@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { expandTiles } from "./reducers/tiles.reducer";
 import { addUserLevel } from './reducers/users.reducer';
 import {  TILE_EXPANSION_VALUE } from './config/constants';
-import TileItem from './components/tile_item';
-import PlantModal from "./modals/add_plant/add_plant.modal";
-import RemovePlant from './modals/remove_plant/remove_plant.modal';
+import TileItem from './components/TileItem';
+import AddPlant from './components/modals/add_plant/AddPlant';
+import RemovePlant from './components/modals/remove_plant/RemovePlant';
 
 function App() {
     const dispatch = useDispatch();
@@ -77,7 +77,7 @@ function App() {
             </div>
 
             <RemovePlant set_show={show_remove_plant_modal} set_hide={()=>setShowRemovePlantModal(false)} selected={selected_tile}/>
-            <PlantModal set_show={show_plant_modal} set_hide={()=>setShowPlantModal(false)} selected={selected_tile}/>
+            <AddPlant set_show={show_plant_modal} set_hide={()=>setShowPlantModal(false)} selected={selected_tile}/>
         </React.Fragment>
     );
 }

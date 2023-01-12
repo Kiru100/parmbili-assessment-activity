@@ -1,4 +1,4 @@
-@use "../../assets/scss/global.scss";
+@use "../../../assets/scss/global.scss";
 
 #show_plant_modal{
     text-align: center;
@@ -18,7 +18,7 @@
         top: 10px;
 
         .close_icon{
-            background: url("../../assets/images/close_button.PNG") no-repeat center/80%;
+            background: url("../../../assets/images/close_button.PNG") no-repeat center/80%;
             display: inline-block;
             height: 10px;
             width: 10px;

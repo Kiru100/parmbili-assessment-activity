@@ -31,6 +31,7 @@ export const tiles = createSlice({
         setTillMode:(state, action) =>{
             const { tile_index } = action.payload;
             state.tiles_list[tile_index].mode = "tilled";
+            state.selected_tile.mode = "tilled";
         },
         /* Changes tile mode to empty then clear the interval if existing. */
         setEmptyMode:(state, action) =>{

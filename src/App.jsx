@@ -60,7 +60,7 @@ function App() {
                                 actions={{ showPlantCropModal, showRemoveCropModal}}
                                 />)
                         }
-                        <p id="total_earnings">Total Earnings: {user_data.total_earnings}$</p>
+                        <p id="total_earnings">Total Earnings: <span id="earning_value">{user_data.total_earnings}</span>$</p>
                         {user_data.level < 4 ? 
                             <button id="expand_land_button" 
                                 className="active" 

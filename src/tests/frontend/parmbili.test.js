@@ -5,11 +5,11 @@ const { Builder, By, Key, until } = require("selenium-webdriver");
 const assert = require("assert");
 
 /* Unit test chrome options setup */
-const screen = {width: 1907, height: 1057};
+const screen = {width: 1280, height: 900 };
 let chrome_options = new chrome.Options().windowSize(screen);
 chrome_options.addArguments("--proxy-server='direct://'");
 chrome_options.addArguments("--proxy-bypass-list=*");
-chrome_options.addArguments("--headless");
+chrome_options.addArguments("--headless"); 
 chrome_options.addArguments("--disable-gpu");
 chrome_options.addArguments("--blink-settings=imagesEnabled=false"); 
 
@@ -204,6 +204,7 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(overlay_button)).click();
         /* Click remove button in modal */
         await driver.findElement(By.css(modal_remove_button)).click();
+
     });
 
     /* Green */
@@ -243,27 +244,29 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(".tile_item:nth-child(15)")).click();
 
         /* Click Till overlay button */
+
         await driver.findElement(By.css(overlay_button)).click();
         /* Click Plant overlay button */
+        await driver.sleep(1000);
         await driver.findElement(By.css(overlay_button)).click();
         /* Click Corn option in modal*/
+        await driver.sleep(1000);
         await driver.findElement(By.css(corn_option)).click();
         /* Click submit button of modal */
+        await driver.sleep(1000);
         await driver.findElement(By.css(modal_submit_button)).click();
 
         await driver.wait(until.elementLocated(By.css(harvest_tile)), 61000);
         await driver.sleep(1000);
-        await driver.findElement(By.css(".tile_item:nth-child(15)")).click();
-        await driver.findElement(By.css(".popover-body button:nth-child(1)")).click();
-        await driver.sleep(1000);
         await driver.findElement(By.css(".tile_item:nth-child(16)")).click();
         await driver.sleep(1000);
         await driver.findElement(By.css(".popover-body button:nth-child(1)")).click();
-
+        await driver.findElement(By.css(".tile_item:nth-child(15)")).click();
+        await driver.sleep(1000);
+        await driver.findElement(By.css(".popover-body button:nth-child(1)")).click();
         await driver.findElement(By.id("expand_land_button")).click();
 
         /* Check if the 25th tile exist */
-        await driver.findElement(By.id(expand_land_button)).click();
         {   
             const elements = await driver.findElements(By.css(last_tile_item)); 
             assert(elements.length);

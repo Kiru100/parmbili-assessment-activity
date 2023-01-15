@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const users = createSlice({
     name:"users",
     initialState:{
-        user_data:{ total_earnings: 40, level: 0 }
+        user_data:{ total_earnings: 50, level: 0 }
     },
     reducers:{
         /* Increase total earnings of user. */

@@ -13,7 +13,6 @@ chrome_options.addArguments("--headless");
 chrome_options.addArguments("--disable-gpu");
 chrome_options.addArguments("--blink-settings=imagesEnabled=false"); 
 
-
 /**
 * Run using: NODE_ENV=development ./node_modules/.bin/mocha src/tests/frontend/*.test.js
 */
@@ -187,6 +186,7 @@ describe('Parmbili testcase', function() {
         let overlay_button = ".popover-body .overlay_button";
         let onion_option = ".modal-body .onion_icon";
         let modal_remove_button = ".modal-body .remove_button";
+
         /* Click Empty Tile */
         await driver.findElement(By.css(empty_tile)).click();
         /* Click Till overlay button */
@@ -204,7 +204,6 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(overlay_button)).click();
         /* Click remove button in modal */
         await driver.findElement(By.css(modal_remove_button)).click();
-
     });
 
     /* Green */
@@ -222,11 +221,12 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(overlay_button)).click();
         /* Click Plant overlay button */
         await driver.findElement(By.css(overlay_button)).click();
-        /* Click Corn option in modal*/
+        /* Click corn option in modal */
         await driver.findElement(By.css(corn_option)).click();
         /* Click submit button of modal */
         await driver.findElement(By.css(modal_submit_button)).click();
 
+        /* Wait until crop can be harvested */
         await driver.wait(until.elementLocated(By.css(harvest_tile)), 61000);
         await driver.findElement(By.css(harvest_tile)).click();
         await driver.findElement(By.css(".popover-body button:nth-child(1)")).click();
@@ -236,7 +236,7 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(overlay_button)).click();
         /* Click Plant overlay button */
         await driver.findElement(By.css(overlay_button)).click();
-        /* Click Corn option in modal*/
+        /* Click corn option in modal */
         await driver.findElement(By.css(corn_option)).click();
         /* Click submit button of modal */
         await driver.findElement(By.css(modal_submit_button)).click();
@@ -244,26 +244,25 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(".tile_item:nth-child(15)")).click();
 
         /* Click Till overlay button */
-
         await driver.findElement(By.css(overlay_button)).click();
         /* Click Plant overlay button */
-        await driver.sleep(1000);
         await driver.findElement(By.css(overlay_button)).click();
-        /* Click Corn option in modal*/
-        await driver.sleep(1000);
+        /* Click corn option in modal */
         await driver.findElement(By.css(corn_option)).click();
         /* Click submit button of modal */
-        await driver.sleep(1000);
         await driver.findElement(By.css(modal_submit_button)).click();
 
-        await driver.wait(until.elementLocated(By.css(harvest_tile)), 61000);
-        await driver.sleep(1000);
-        await driver.findElement(By.css(".tile_item:nth-child(16)")).click();
-        await driver.sleep(1000);
-        await driver.findElement(By.css(".popover-body button:nth-child(1)")).click();
-        await driver.findElement(By.css(".tile_item:nth-child(15)")).click();
-        await driver.sleep(1000);
-        await driver.findElement(By.css(".popover-body button:nth-child(1)")).click();
+        let tile_order_number = 16;
+        for(let action_index=0; action_index<2; action_index++){
+            /* Wait until tile is ready to harvest then click it. */
+            await driver.wait(until.elementLocated(By.css(harvest_tile)), 61000);
+            await driver.findElement(By.css(`.tile_item:nth-child(${tile_order_number})`)).click();
+            await driver.sleep(1000);
+            await driver.findElement(By.css(".popover-body button:nth-child(1)")).click();
+            tile_order_number--;
+        }
+
+        /* Expand the land to 5x5 */
         await driver.findElement(By.id("expand_land_button")).click();
 
         /* Check if the 25th tile exist */
@@ -271,8 +270,5 @@ describe('Parmbili testcase', function() {
             const elements = await driver.findElements(By.css(last_tile_item)); 
             assert(elements.length);
         }
-
-        await driver.sleep(5000);
     });
-    
 });

@@ -301,6 +301,7 @@ describe('Parmbili testcase', function() {
         let corn_option = ".modal-body .corn_icon";
         let modal_submit_button = ".modal-body .action_container button[type=submit]";
         let harvest_tile = ".tile_item.harvest";
+        let harvest_button = ".popover-body button:nth-child(1)";
         let last_tile_item = ".tile_item:nth-child(25)";
         let tile_order_number = 16;
 
@@ -316,33 +317,36 @@ describe('Parmbili testcase', function() {
 
         /* Click tile with harvest class then click pop over harvest button */
         await driver.findElement(By.css(harvest_tile)).click();
-        await driver.findElement(By.css(".popover-body button:nth-child(1)")).click();
+        await assertElement(harvest_button);
+
+        await driver.findElement(By.css(harvest_button)).click();
+        await assertElement(overlay_button);
 
         /* Plant second crop */
         await plantCorn(overlay_button, corn_option, modal_submit_button);
 
         /* Plant third crop */
         await driver.findElement(By.css(".tile_item:nth-child(15)")).click();
+        await assertElement(overlay_button);
+
         await plantCorn(overlay_button, corn_option, modal_submit_button);
 
         for(let action_index=0; action_index<2; action_index++){
             /* Wait until tile is ready to harvest then click it. */
-            await driver.wait(until.elementLocated(By.css(harvest_tile)), 61000);
+            await assertElement(harvest_tile, 61000);
             await driver.findElement(By.css(`.tile_item:nth-child(${tile_order_number})`)).click();
+            await assertElement(harvest_button);
             await driver.sleep(1000);
-            await driver.findElement(By.css(".popover-body button:nth-child(1)")).click();
+            await driver.findElement(By.css(harvest_button)).click();
+
             tile_order_number--;
         }
 
-        /* Expand the land to 5x5 */
+        /* Expand the land to 5x5 and assert if the 25th tile exist. */
         await driver.findElement(By.id("expand_land_button")).click();
-
-        /* Check if the 25th tile exist */
-        {   
-            const elements = await driver.findElements(By.css(last_tile_item)); 
-            assert(elements.length);
-        }
+        await assertElement(last_tile_item);
     });
+
 
     async function assertElement(element_to_assert, duration = 30000){
         await driver.wait(until.elementLocated(By.css(element_to_assert)), duration);
@@ -386,5 +390,4 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(modal_submit_button)).click();
         await assertNotPresentElement(modal_submit_button);
     }
-
 });

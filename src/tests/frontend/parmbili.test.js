@@ -38,7 +38,6 @@ describe('Parmbili testcase', function() {
         await driver.quit();
     });
 
-
     /* ------------------------------------------------------------------- */
     /* -------------------------- Start of Functions --------------------- */
     /* ------------------------------------------------------------------- */
@@ -113,7 +112,6 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(modal_submit_button)).click();
         await assertNotPresentElement(modal_submit_button);
     }
-
     
     /**
     * DOCU: Harvest a crop to tile item. <br>
@@ -410,13 +408,9 @@ describe('Parmbili testcase', function() {
         /* Wait until crop can be harvested */
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);
 
-        /* Click tile with harvest class */
-        await driver.findElement(By.css(harvest_tile)).click();
-        await assertElement(harvest_button);
-
-        /* click pop over harvest button */
-        await driver.findElement(By.css(harvest_button)).click();
-        await assertElement(overlay_button);
+        /* Wait until tile is ready to harvest then click it. */
+        await assertElement(harvest_tile, ASSERT_DURATION.slowest);
+        await harvestCrop(16, harvest_button, overlay_button);
 
         /* Plant second crop */
         await plantCrop(overlay_button, corn_option, modal_submit_button);

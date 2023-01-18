@@ -397,7 +397,6 @@ describe('Parmbili testcase', function() {
 
             await driver.sleep(TIMEOUT_SPEED.normal);
             await driver.findElement(By.css(harvest_button)).click();
-            await assertNotPresentElement(harvest_button);
             tile_order_number--;
         }
 

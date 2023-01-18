@@ -392,7 +392,6 @@ describe('Parmbili testcase', function() {
     it('12. Allow user to get enough money then expand land to 5 x 5.', async function(){
         let overlay_button = ".popover-body .overlay_button";
         let corn_option = ".modal-body .corn_icon";
-        let modal_submit_button = ".modal-body .action_container button[type=submit]";
         let harvest_tile = ".tile_item.harvest";
 
         /* Plant first crop */

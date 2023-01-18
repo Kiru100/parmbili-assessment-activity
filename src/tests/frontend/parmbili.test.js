@@ -18,8 +18,8 @@ chrome_options.addArguments("--blink-settings=imagesEnabled=false");
 * @author Noel
 */
 describe('Parmbili testcase', function() {
-    this.timeout(150000)
-    let driver
+    this.timeout(TIMEOUT_SPEED.custom);
+    let driver; 
     
     before(async function(){
         driver = await new Builder()
@@ -185,7 +185,6 @@ describe('Parmbili testcase', function() {
         /* Click tile overlay button to set a tile to tilled */
         await driver.findElement(By.css(overylay_body)).click();
         await assertElement(tilled_tile);
-
 
         /* Click tile item with .tilled class then assert if it's already hidden.*/
         await driver.findElement(By.css(tilled_tile)).click();

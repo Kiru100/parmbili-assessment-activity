@@ -1,13 +1,14 @@
 const chrome = require("selenium-webdriver/chrome");
 const { Builder, By, Key, until } = require("selenium-webdriver");
 const assert = require("assert");
+const { TIMEOUT_SPEED, ASSERT_DURATION, AUTO_HARVEST } = require("../../config/test_constants");
 
 /* Unit test chrome options setup */
 const screen = {width: 1280, height: 900 };
 let chrome_options = new chrome.Options().windowSize(screen);
 chrome_options.addArguments("--proxy-server='direct://'");
 chrome_options.addArguments("--proxy-bypass-list=*");
-// chrome_options.addArguments("--headless"); 
+chrome_options.addArguments("--headless"); 
 chrome_options.addArguments("--disable-gpu");
 chrome_options.addArguments("--blink-settings=imagesEnabled=false"); 
 
@@ -30,12 +31,75 @@ describe('Parmbili testcase', function() {
     });
 
     beforeEach(async function() {
-        await driver.sleep(1000);
+        await driver.sleep(TIMEOUT_SPEED.normal);
     });  
 
     after(async function() {
         await driver.quit();
     });
+
+    /** 
+    * DOCU: Assert elements <br>
+    * Last updated at: January 18, 2023
+    * @author Noel
+    */
+    async function assertElement(element_to_assert, duration = ASSERT_DURATION.default){
+        await driver.wait(until.elementLocated(By.css(element_to_assert)), duration);
+        {
+            const element = await driver.findElements(By.css(element_to_assert));
+            assert(element.length);
+        }
+        await driver.wait(until.elementIsVisible(await driver.findElement(By.css(element_to_assert))), duration);
+    }
+
+    /** 
+    * DOCU: Assert element for not present. <br>
+    * Last updated at: January 18, 2023
+    * @author Noel
+    */
+    async function assertNotPresentElement(element_to_assert){
+        await driver.sleep(TIMEOUT_SPEED.fastest);
+        {
+            const element = await driver.findElements(By.css(element_to_assert)); 
+            assert(!element.length);
+        }
+    }
+    
+    /** 
+    * DOCU: Assert text of element. <br>
+    * Last updated at: January 18, 2023
+    * @author Noel
+    */
+    async function assertText(element_to_assert, expected_text){
+        await driver.wait(until.elementLocated(By.css(element_to_assert)), TIMEOUT_SPEED.faster);
+        {
+            assert(await driver.findElement(By.css(element_to_assert)).getText() === expected_text);
+        }
+        await driver.wait(until.elementIsVisible(await driver.findElement(By.css(element_to_assert))), TIMEOUT_SPEED.faster);
+    }
+
+    /** 
+    * DOCU: Automatically plant a corn to tile item. <br>
+    * Last updated at: January 18, 2023
+    * @author Noel
+    */
+    async function plantCrop(overlay_button, crop_option, modal_submit_button){
+        /* Click Till overlay button */
+        await driver.findElement(By.css(overlay_button)).click();
+        await assertElement(overlay_button);
+
+        /* Click Plant overlay button */
+        await driver.findElement(By.css(overlay_button)).click();
+        await assertElement(crop_option);
+
+        /* Click corn option in modal */
+        await driver.findElement(By.css(crop_option)).click();
+        await assertElement(modal_submit_button);
+
+        /* Click submit button of modal */
+        await driver.findElement(By.css(modal_submit_button)).click();
+        await assertNotPresentElement(modal_submit_button);
+    }
 
     /**
     * DOCU: (Expand land button, red) 1. Check if expanding land will work with insufficient fund. <br>
@@ -223,7 +287,7 @@ describe('Parmbili testcase', function() {
         let earning_value = await driver.findElement(By.id(earning_value_text)).getText();
 
         /* Wait for crops to be ready to harvest. */
-        await assertElement(harvest_tile, 30000);
+        await assertElement(harvest_tile);
 
         /* Click tile item with .harvest class. */
         await driver.findElement(By.css(harvest_tile)).click();
@@ -244,12 +308,12 @@ describe('Parmbili testcase', function() {
     });
 
     /**
-    * DOCU: (Remove Crop) 10. Check if remove crop feature works. <br>
+    * DOCU: (Remove Crop) 10. Check if tile overlay "Remove" can be view. <br>
     * Expected test result: green
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('10. Show remove crop modal and accept remove.', async function(){
+    it('10. Show remove crop modal.', async function(){
         let modal_submit_button = ".action_container button[type=submit]";    
         let empty_tile = ".tile_item.empty";
         let planted_tile = ".tile_item.planted";
@@ -260,22 +324,9 @@ describe('Parmbili testcase', function() {
         /* Click Empty Tile */
         await driver.findElement(By.css(empty_tile)).click();
         await assertElement(overlay_button);
-
-        /* Click Till overlay button */
-        await driver.findElement(By.css(overlay_button)).click();
-        await assertElement(overlay_button);
-
-        /* Click Plant overlay button */
-        await driver.findElement(By.css(overlay_button)).click();
-        await assertElement(onion_option);
-
-        /* Click onion option in modal*/
-        await driver.findElement(By.css(onion_option)).click();
-        await assertElement(modal_submit_button);
-
-        /* Click submit button of modal */
-        await driver.findElement(By.css(modal_submit_button)).click();
-        await assertElement(planted_tile);
+    
+        /* Plant onion to empty tile. */
+        await plantCrop(overlay_button, onion_option, modal_submit_button);
 
         /* Click Planted Tile */
         await driver.findElement(By.css(planted_tile)).click();
@@ -284,36 +335,44 @@ describe('Parmbili testcase', function() {
         /* Click remove overlay */
         await driver.findElement(By.css(overlay_button)).click();
         await assertElement(modal_remove_button);
-
-        /* Click remove button in modal */
-        await driver.findElement(By.css(modal_remove_button)).click();
-        await assertNotPresentElement(modal_remove_button);
     });
 
-    /** 
-    * DOCU: (Expand Land button) 11. Check if expand land button is working. <br>
+    /**
+    * DOCU: (Remove Crop) 11. Check if remove crop button in modal works. <br>
     * Expected test result: green
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('11. Get rich and expand to land 5 x 5.', async function(){
+    it('11. Remove Crop', async function(){
+        /* Click remove button in modal */
+        await driver.findElement(By.css(".modal-body .remove_button")).click();
+        await assertNotPresentElement(".modal-body .remove_button");
+    });
+
+    /** 
+    * DOCU: (Expand Land button) 12. Check if expand land button is working. <br>
+    * Expected test result: green
+    * Last updated at: January 17, 2023
+    * @author Noel
+    */
+    it('12. Get rich and expand to land 5 x 5.', async function(){
         let overlay_button = ".popover-body .overlay_button";
         let corn_option = ".modal-body .corn_icon";
         let modal_submit_button = ".modal-body .action_container button[type=submit]";
         let harvest_tile = ".tile_item.harvest";
         let harvest_button = ".popover-body button:nth-child(1)";
         let last_tile_item = ".tile_item:nth-child(25)";
-        let tile_order_number = 16;
+        let tile_order_number = AUTO_HARVEST.tile_order_number;
 
         /* Plant first crop */
         /* Click Empty tile (16th)*/
         await driver.findElement(By.css(".tile_item:nth-child(16)")).click();
         await assertElement(overlay_button);
 
-        await plantCorn(overlay_button, corn_option, modal_submit_button);
+        await plantCrop(overlay_button, corn_option, modal_submit_button);
         
         /* Wait until crop can be harvested */
-        await assertElement(harvest_tile, 61000);
+        await assertElement(harvest_tile, ASSERT_DURATION.slowest);
 
         /* Click tile with harvest class then click pop over harvest button */
         await driver.findElement(By.css(harvest_tile)).click();
@@ -323,19 +382,20 @@ describe('Parmbili testcase', function() {
         await assertElement(overlay_button);
 
         /* Plant second crop */
-        await plantCorn(overlay_button, corn_option, modal_submit_button);
+        await plantCrop(overlay_button, corn_option, modal_submit_button);
 
         /* Plant third crop */
         await driver.findElement(By.css(".tile_item:nth-child(15)")).click();
         await assertElement(overlay_button);
-        await plantCorn(overlay_button, corn_option, modal_submit_button);
+        await plantCrop(overlay_button, corn_option, modal_submit_button);
 
-        for(let action_index=0; action_index<2; action_index++){
+        for(let action_index = AUTO_HARVEST.start_index; action_index < AUTO_HARVEST.end_index; action_index++){
             /* Wait until tile is ready to harvest then click it. */
-            await assertElement(harvest_tile, 61000);
+            await assertElement(harvest_tile, ASSERT_DURATION.slowest);
             await driver.findElement(By.css(`.tile_item:nth-child(${tile_order_number})`)).click();
             await assertElement(harvest_button);
 
+            await driver.sleep(TIMEOUT_SPEED.normal);
             await driver.findElement(By.css(harvest_button)).click();
             await assertNotPresentElement(harvest_button);
             tile_order_number--;
@@ -345,62 +405,4 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.id("expand_land_button")).click();
         await assertElement(last_tile_item);
     });
-
-    /** 
-    * DOCU: Assert elements <br>
-    * Last updated at: January 18, 2023
-    * @author Noel
-    */
-    async function assertElement(element_to_assert, duration = 30000){
-        await driver.wait(until.elementLocated(By.css(element_to_assert)), duration);
-        {
-            const element = await driver.findElements(By.css(element_to_assert));
-            assert(element.length);
-        }
-        await driver.wait(until.elementIsVisible(await driver.findElement(By.css(element_to_assert))), duration);
-    }
-
-    /** 
-    * DOCU: Assert element for not present. <br>
-    * Last updated at: January 18, 2023
-    * @author Noel
-    */
-    async function assertNotPresentElement(element_to_assert){
-        await driver.sleep(1000);
-        {
-            const element = await driver.findElements(By.css(element_to_assert)); 
-            assert(!element.length);
-        }
-    }
-    
-    /** 
-    * DOCU: Assert text of element. <br>
-    * Last updated at: January 18, 2023
-    * @author Noel
-    */
-    async function assertText(element_to_assert, expected_text){
-        await driver.wait(until.elementLocated(By.css(element_to_assert)), 2000);
-        {
-            assert(await driver.findElement(By.css(element_to_assert)).getText() === expected_text);
-        }
-        await driver.wait(until.elementIsVisible(await driver.findElement(By.css(element_to_assert))), 2000);
-    }
-
-    async function plantCorn(overlay_button, corn_option, modal_submit_button){
-        /* Click Till overlay button */
-        await driver.findElement(By.css(overlay_button)).click();
-        await assertElement(overlay_button);
-
-        /* Click Plant overlay button */
-        await driver.findElement(By.css(overlay_button)).click();
-        await assertElement(corn_option);
-
-        /* Click corn option in modal */
-        await driver.findElement(By.css(corn_option)).click();
-        await assertElement(modal_submit_button);
-
-        /* Click submit button of modal */
-        await driver.findElement(By.css(modal_submit_button)).click();
-        await assertNotPresentElement(modal_submit_button);
-    }
 });

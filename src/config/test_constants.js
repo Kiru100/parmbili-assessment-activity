@@ -3,7 +3,8 @@ const TIMEOUT_SPEED = {
     faster: 500,
     normal: 1000,
     slow: 2000,
-    slowest: 3000
+    slowest: 3000,
+    custom: 150000
 };
 
 const ASSERT_DURATION = {

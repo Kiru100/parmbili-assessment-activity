@@ -95,7 +95,9 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 18, 2023
     * @author Noel
     */
-    async function plantCrop(overlay_button, crop_option, modal_submit_button){
+    async function plantCrop(overlay_button, crop_option){
+        let modal_submit_button = ".action_container button[type=submit]";
+
         /* Click Till overlay button */
         await driver.findElement(By.css(overlay_button)).click();
         await assertElement(overlay_button);
@@ -358,7 +360,7 @@ describe('Parmbili testcase', function() {
         await assertElement(overlay_button);
     
         /* Plant onion to empty tile. */
-        await plantCrop(overlay_button, ".modal-body .onion_icon", ".action_container button[type=submit]");
+        await plantCrop(overlay_button, ".modal-body .onion_icon");
 
         /* Click Planted Tile */
         await driver.findElement(By.css(".tile_item.planted")).click();
@@ -397,7 +399,7 @@ describe('Parmbili testcase', function() {
         /* Click Empty tile (16th)*/
         await driver.findElement(By.css(".tile_item:nth-child(16)")).click();
         await assertElement(overlay_button);
-        await plantCrop(overlay_button, corn_option, modal_submit_button);
+        await plantCrop(overlay_button, corn_option);
         
         /* Wait until crop can be harvested */
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);
@@ -407,12 +409,12 @@ describe('Parmbili testcase', function() {
         await harvestCrop(16, overlay_button);
 
         /* Plant second crop */
-        await plantCrop(overlay_button, corn_option, modal_submit_button);
+        await plantCrop(overlay_button, corn_option);
 
         /* Plant third crop */
         await driver.findElement(By.css(".tile_item:nth-child(15)")).click();
         await assertElement(overlay_button);
-        await plantCrop(overlay_button, corn_option, modal_submit_button);
+        await plantCrop(overlay_button, corn_option);
 
         /* Wait until tile is ready to harvest then harvest it. */
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);

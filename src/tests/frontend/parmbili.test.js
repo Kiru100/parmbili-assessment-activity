@@ -38,6 +38,11 @@ describe('Parmbili testcase', function() {
         await driver.quit();
     });
 
+
+    /* ------------------------------------------------------------------- */
+    /* -------------------------- Start of Functions --------------------- */
+    /* ------------------------------------------------------------------- */
+
     /**
     * DOCU: Assert that an element is visible on the page. <br>
     * @param {string} element_to_assert - The element you want to assert.
@@ -85,9 +90,9 @@ describe('Parmbili testcase', function() {
 
     /**
     * DOCU: Automatically plant a crop to tile item. <br>
-    * @param overlay_button - The button that opens the overlay
-    * @param crop_option - The css selector for the crop option in the modal
-    * @param modal_submit_button - The submit button in the modal that appears when you click the Till
+    * @param {string} overlay_button - The button that opens the overlay
+    * @param {string} crop_option - The css selector for the crop option in the modal
+    * @param {string} modal_submit_button - The submit button in the modal that appears when you click the Till
     * Last updated at: January 18, 2023
     * @author Noel
     */
@@ -108,6 +113,35 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(modal_submit_button)).click();
         await assertNotPresentElement(modal_submit_button);
     }
+
+    
+    /**
+    * DOCU: Harvest a crop to tile item. <br>
+    * @param {integer} tile_order_number - The order number of the tile item.
+    * @param {string} harvest_button - The button that appears when you click on a tile item.
+    * @param {string} overlay_button - The button that appears after you click the harvest button.
+    * Last updated at: January 18, 2023
+    * @author Noel
+    */
+    async function harvestCrop(tile_order_number, harvest_button, overlay_button){
+        /* Click tile item */
+        await driver.findElement(By.css(`.tile_item:nth-child(${tile_order_number})`)).click();
+        await assertElement(harvest_button);
+
+        await driver.sleep(TIMEOUT_SPEED.normal);
+
+        /* Click harvest button */
+        await driver.findElement(By.css(harvest_button)).click();
+        await assertElement(overlay_button);
+    }
+
+    /* ------------------------------------------------------------------- */
+    /* -------------------------- End of Functions ----------------------- */
+    /* ------------------------------------------------------------------- */
+
+    /* ------------------------------------------------------------------- */
+    /* ------------------------ Start of Test Cases ---------------------- */
+    /* ------------------------------------------------------------------- */
 
     /**
     * DOCU: (Expand land button, red) 1. Check if expanding land will work with insufficient fund. <br>
@@ -246,7 +280,6 @@ describe('Parmbili testcase', function() {
     * @author Noel
     */
     it('8. Allow user to plant a crop.', async function(){   
-        let planted_tile = ".tile_item.planted";
         let earning_value_text = "earning_value";
         let overlay_button = ".overlay_button";
         let potato_icon = ".potato_icon";
@@ -272,7 +305,7 @@ describe('Parmbili testcase', function() {
         await assertNotPresentElement("show_plant_modal");
         
         /* Check if crop is planted. */
-        await assertElement(planted_tile);
+        await assertElement(".tile_item.planted");
 
         let new_earning_value = await driver.findElement(By.id(earning_value_text)).getText();
 
@@ -368,7 +401,6 @@ describe('Parmbili testcase', function() {
         let modal_submit_button = ".modal-body .action_container button[type=submit]";
         let harvest_tile = ".tile_item.harvest";
         let harvest_button = ".popover-body button:nth-child(1)";
-        let last_tile_item = ".tile_item:nth-child(25)";
         let tile_order_number = AUTO_HARVEST.tile_order_number;
 
         /* Plant first crop */
@@ -396,22 +428,23 @@ describe('Parmbili testcase', function() {
         await assertElement(overlay_button);
         await plantCrop(overlay_button, corn_option, modal_submit_button);
 
-        for(let action_index = AUTO_HARVEST.start_index; action_index < AUTO_HARVEST.end_index; action_index++){
-            /* Wait until tile is ready to harvest then click it. */
-            await assertElement(harvest_tile, ASSERT_DURATION.slowest);
+        
+        /* Wait until tile is ready to harvest then click it. */
+        await assertElement(harvest_tile, ASSERT_DURATION.slowest);
+        await harvestCrop(16, harvest_button, overlay_button);
 
-            /* Click a tile to harvest. */
-            await driver.findElement(By.css(`.tile_item:nth-child(${tile_order_number})`)).click();
-            await assertElement(harvest_button);
-
-            await driver.sleep(TIMEOUT_SPEED.normal);
-            await driver.findElement(By.css(harvest_button)).click();
-            await assertElement(overlay_button);
-            tile_order_number--;
-        }
+        /* Wait until tile is ready to harvest then click it. */
+        await assertElement(harvest_tile, ASSERT_DURATION.slowest);
+        await harvestCrop(15, harvest_button, overlay_button);
+           
+        
 
         /* Expand the land to 5x5 and assert if the 25th tile exist. */
         await driver.findElement(By.id("expand_land_button")).click();
-        await assertElement(last_tile_item);
+        await assertElement(".tile_item:nth-child(25)");
     });
+
+    /* ------------------------------------------------------------------- */
+    /* -------------------------- End of Test Cases ---------------------- */
+    /* ------------------------------------------------------------------- */
 });

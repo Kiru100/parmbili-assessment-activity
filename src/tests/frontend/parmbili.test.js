@@ -7,7 +7,7 @@ const screen = {width: 1280, height: 900 };
 let chrome_options = new chrome.Options().windowSize(screen);
 chrome_options.addArguments("--proxy-server='direct://'");
 chrome_options.addArguments("--proxy-bypass-list=*");
-chrome_options.addArguments("--headless"); 
+// chrome_options.addArguments("--headless"); 
 chrome_options.addArguments("--disable-gpu");
 chrome_options.addArguments("--blink-settings=imagesEnabled=false"); 
 
@@ -126,7 +126,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('6. Allow user to view tile overlay "Plant"', async function(){
+    it('6. Allow user to view tile overlay "Plant".', async function(){
         /* Click tile item that's tilled by the user. */
         await driver.findElement(By.css(".tile_item.tilled")).click();
 
@@ -140,7 +140,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('7. Allow user to view, close and cancel plant crop modal', async function(){
+    it('7. Allow user to view, close and cancel plant crop modal.', async function(){
         let overlay_button = ".overlay_button";
         let modal_body = ".modal-body";
 
@@ -174,7 +174,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('8. Plants a crop', async function(){   
+    it('8. Plants a crop.', async function(){   
         let planted_tile = ".tile_item.planted";
         let earning_value_text = "earning_value";
         let overlay_button = ".overlay_button";
@@ -215,7 +215,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('9. Harvest a crop', async function(){    
+    it('9. Harvest a crop.', async function(){    
         let harvest_tile = ".tile_item.harvest";
         let tile_item = ".tile_item";
         let earning_value_text = "earning_value";
@@ -249,7 +249,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('10. Show remove crop modal and accept remove', async function(){
+    it('10. Show remove crop modal and accept remove.', async function(){
         let modal_submit_button = ".action_container button[type=submit]";    
         let empty_tile = ".tile_item.empty";
         let planted_tile = ".tile_item.planted";
@@ -296,7 +296,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('11. Get rich and expand to land 5 x 5', async function(){
+    it('11. Get rich and expand to land 5 x 5.', async function(){
         let overlay_button = ".popover-body .overlay_button";
         let corn_option = ".modal-body .corn_icon";
         let modal_submit_button = ".modal-body .action_container button[type=submit]";
@@ -328,7 +328,6 @@ describe('Parmbili testcase', function() {
         /* Plant third crop */
         await driver.findElement(By.css(".tile_item:nth-child(15)")).click();
         await assertElement(overlay_button);
-
         await plantCorn(overlay_button, corn_option, modal_submit_button);
 
         for(let action_index=0; action_index<2; action_index++){
@@ -336,9 +335,9 @@ describe('Parmbili testcase', function() {
             await assertElement(harvest_tile, 61000);
             await driver.findElement(By.css(`.tile_item:nth-child(${tile_order_number})`)).click();
             await assertElement(harvest_button);
-            await driver.sleep(1000);
-            await driver.findElement(By.css(harvest_button)).click();
 
+            await driver.findElement(By.css(harvest_button)).click();
+            await assertNotPresentElement(harvest_button);
             tile_order_number--;
         }
 

@@ -1,10 +1,10 @@
 const chrome = require("selenium-webdriver/chrome");
-const { Builder, By, Key, until } = require("selenium-webdriver");
 const assert = require("assert");
-const { TIMEOUT_SPEED, ASSERT_DURATION } = require("../../config/test_constants");
+const { Builder, By, Key, until } = require("selenium-webdriver");
+const { TIMEOUT_SPEED, ASSERT_DURATION, SCREEN_SIZE } = require("../../config/test_helpers");
 
 /* Unit test chrome options setup */
-const screen = {width: 1280, height: 900 };
+const screen = { width: SCREEN_SIZE.witdh, height: SCREEN_SIZE.height };
 let chrome_options = new chrome.Options().windowSize(screen);
 chrome_options.addArguments("--proxy-server='direct://'");
 chrome_options.addArguments("--proxy-bypass-list=*");
@@ -389,9 +389,9 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('12. Allow user to get enough money then expand land to 5 x 5.', async function(){
-        let overlay_button = ".popover-body .overlay_button";
+    it('12. Allow user to plant multiple crops', async function(){
         let corn_option = ".modal-body .corn_icon";
+        let overlay_button = ".popover-body .overlay_button";
         let harvest_tile = ".tile_item.harvest";
 
         /* Plant first crop */
@@ -414,6 +414,17 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(".tile_item:nth-child(15)")).click();
         await assertElement(overlay_button);
         await plantCrop(overlay_button, corn_option);
+    });
+
+    /** 
+    * DOCU: (Expand Land button) 13. Check if expand land button is working. <br>
+    * Expected test result: green
+    * Last updated at: January 17, 2023
+    * @author Noel
+    */
+    it('13. Harvest multiple crops and expand land to 5 x 5.', async function(){
+        let overlay_button = ".popover-body .overlay_button";
+        let harvest_tile = ".tile_item.harvest";
 
         /* Wait until tile is ready to harvest then harvest it. */
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);

@@ -351,27 +351,22 @@ describe('Parmbili testcase', function() {
     * @author Noel
     */
     it('10. Allow user to view remove crop modal.', async function(){
-        let modal_submit_button = ".action_container button[type=submit]";    
-        let empty_tile = ".tile_item.empty";
-        let planted_tile = ".tile_item.planted";
         let overlay_button = ".popover-body .overlay_button";
-        let onion_option = ".modal-body .onion_icon";
-        let modal_remove_button = ".modal-body .remove_button";
 
         /* Click Empty Tile */
-        await driver.findElement(By.css(empty_tile)).click();
+        await driver.findElement(By.css(".tile_item.empty")).click();
         await assertElement(overlay_button);
     
         /* Plant onion to empty tile. */
-        await plantCrop(overlay_button, onion_option, modal_submit_button);
+        await plantCrop(overlay_button, ".modal-body .onion_icon", ".action_container button[type=submit]");
 
         /* Click Planted Tile */
-        await driver.findElement(By.css(planted_tile)).click();
+        await driver.findElement(By.css(".tile_item.planted")).click();
         await assertElement(overlay_button);
 
         /* Click remove overlay */
         await driver.findElement(By.css(overlay_button)).click();
-        await assertElement(modal_remove_button);
+        await assertElement(".modal-body .remove_button");
     });
 
     /**

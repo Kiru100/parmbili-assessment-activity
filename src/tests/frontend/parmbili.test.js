@@ -38,8 +38,10 @@ describe('Parmbili testcase', function() {
         await driver.quit();
     });
 
-    /** 
-    * DOCU: Assert elements <br>
+    /**
+    * DOCU: Assert that an element is visible on the page. <br>
+    * @param {string} element_to_assert - The element you want to assert.
+    * @param {integer} duration - The amount of time to wait for the element to appear.
     * Last updated at: January 18, 2023
     * @author Noel
     */
@@ -52,8 +54,9 @@ describe('Parmbili testcase', function() {
         await driver.wait(until.elementIsVisible(await driver.findElement(By.css(element_to_assert))), duration);
     }
 
-    /** 
-    * DOCU: Assert element for not present. <br>
+    /**
+    * DOCU: Asserts that the element is not present on the page <br>
+    * @param {string} element_to_assert - The element you want to assert is not present.
     * Last updated at: January 18, 2023
     * @author Noel
     */
@@ -65,8 +68,10 @@ describe('Parmbili testcase', function() {
         }
     }
     
-    /** 
-    * DOCU: Assert text of element. <br>
+    /**
+    * DOCU: Asserts that the text of the element is equal to the expected text <br>
+    * @param {string} element_to_assert - The element you want to assert the text of.
+    * @param {string} expected_text - The text you want to assert.
     * Last updated at: January 18, 2023
     * @author Noel
     */
@@ -78,8 +83,11 @@ describe('Parmbili testcase', function() {
         await driver.wait(until.elementIsVisible(await driver.findElement(By.css(element_to_assert))), TIMEOUT_SPEED.faster);
     }
 
-    /** 
-    * DOCU: Automatically plant a corn to tile item. <br>
+    /**
+    * DOCU: Automatically plant a crop to tile item. <br>
+    * @param overlay_button - The button that opens the overlay
+    * @param crop_option - The css selector for the crop option in the modal
+    * @param modal_submit_button - The submit button in the modal that appears when you click the Till
     * Last updated at: January 18, 2023
     * @author Noel
     */
@@ -374,10 +382,11 @@ describe('Parmbili testcase', function() {
         /* Wait until crop can be harvested */
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);
 
-        /* Click tile with harvest class then click pop over harvest button */
+        /* Click tile with harvest class */
         await driver.findElement(By.css(harvest_tile)).click();
         await assertElement(harvest_button);
 
+        /* click pop over harvest button */
         await driver.findElement(By.css(harvest_button)).click();
         await assertElement(overlay_button);
 
@@ -392,11 +401,14 @@ describe('Parmbili testcase', function() {
         for(let action_index = AUTO_HARVEST.start_index; action_index < AUTO_HARVEST.end_index; action_index++){
             /* Wait until tile is ready to harvest then click it. */
             await assertElement(harvest_tile, ASSERT_DURATION.slowest);
+
+            /* Click a tile to harvest. */
             await driver.findElement(By.css(`.tile_item:nth-child(${tile_order_number})`)).click();
             await assertElement(harvest_button);
 
             await driver.sleep(TIMEOUT_SPEED.normal);
             await driver.findElement(By.css(harvest_button)).click();
+            await assertElement(overlay_button);
             tile_order_number--;
         }
 

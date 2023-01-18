@@ -346,7 +346,11 @@ describe('Parmbili testcase', function() {
         await assertElement(last_tile_item);
     });
 
-
+    /** 
+    * DOCU: Assert elements <br>
+    * Last updated at: January 18, 2023
+    * @author Noel
+    */
     async function assertElement(element_to_assert, duration = 30000){
         await driver.wait(until.elementLocated(By.css(element_to_assert)), duration);
         {
@@ -356,6 +360,11 @@ describe('Parmbili testcase', function() {
         await driver.wait(until.elementIsVisible(await driver.findElement(By.css(element_to_assert))), duration);
     }
 
+    /** 
+    * DOCU: Assert element for not present. <br>
+    * Last updated at: January 18, 2023
+    * @author Noel
+    */
     async function assertNotPresentElement(element_to_assert){
         await driver.sleep(1000);
         {
@@ -364,6 +373,11 @@ describe('Parmbili testcase', function() {
         }
     }
     
+    /** 
+    * DOCU: Assert text of element. <br>
+    * Last updated at: January 18, 2023
+    * @author Noel
+    */
     async function assertText(element_to_assert, expected_text){
         await driver.wait(until.elementLocated(By.css(element_to_assert)), 2000);
         {

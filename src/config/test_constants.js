@@ -17,7 +17,6 @@ const ASSERT_DURATION = {
 const AUTO_HARVEST = {
     start_index: 0,
     end_index: 2,
-    tile_order_number: 16
 }
 
 exports.TIMEOUT_SPEED = TIMEOUT_SPEED;

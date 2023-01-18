@@ -14,11 +14,5 @@ const ASSERT_DURATION = {
     slowest: 61000
 }
 
-const AUTO_HARVEST = {
-    start_index: 0,
-    end_index: 2,
-}
-
 exports.TIMEOUT_SPEED = TIMEOUT_SPEED;
 exports.ASSERT_DURATION = ASSERT_DURATION;
-exports.AUTO_HARVEST = AUTO_HARVEST;

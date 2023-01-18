@@ -1,7 +1,7 @@
 const chrome = require("selenium-webdriver/chrome");
 const { Builder, By, Key, until } = require("selenium-webdriver");
 const assert = require("assert");
-const { TIMEOUT_SPEED, ASSERT_DURATION, AUTO_HARVEST } = require("../../config/test_constants");
+const { TIMEOUT_SPEED, ASSERT_DURATION } = require("../../config/test_constants");
 
 /* Unit test chrome options setup */
 const screen = {width: 1280, height: 900 };

@@ -91,7 +91,6 @@ describe('Parmbili testcase', function() {
     * DOCU: Automatically plant a crop to tile item. <br>
     * @param {string} overlay_button - The button that opens the overlay
     * @param {string} crop_option - The css selector for the crop option in the modal
-    * @param {string} modal_submit_button - The submit button in the modal that appears when you click the Till
     * Last updated at: January 18, 2023
     * @author Noel
     */
@@ -118,7 +117,6 @@ describe('Parmbili testcase', function() {
     /**
     * DOCU: Harvest a crop to tile item. <br>
     * @param {integer} tile_order_number - The order number of the tile item.
-    * @param {string} harvest_button - The button that appears when you click on a tile item.
     * @param {string} overlay_button - The button that appears after you click the harvest button.
     * Last updated at: January 18, 2023
     * @author Noel

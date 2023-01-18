@@ -128,9 +128,8 @@ describe('Parmbili testcase', function() {
         await driver.findElement(By.css(`.tile_item:nth-child(${tile_order_number})`)).click();
         await assertElement(harvest_button);
 
-        await driver.sleep(TIMEOUT_SPEED.normal);
-
         /* Click harvest button */
+        await driver.sleep(TIMEOUT_SPEED.faster);
         await driver.findElement(By.css(harvest_button)).click();
         await assertElement(overlay_button);
     }
@@ -401,7 +400,6 @@ describe('Parmbili testcase', function() {
         let modal_submit_button = ".modal-body .action_container button[type=submit]";
         let harvest_tile = ".tile_item.harvest";
         let harvest_button = ".popover-body button:nth-child(1)";
-        let tile_order_number = AUTO_HARVEST.tile_order_number;
 
         /* Plant first crop */
         /* Click Empty tile (16th)*/
@@ -428,7 +426,6 @@ describe('Parmbili testcase', function() {
         await assertElement(overlay_button);
         await plantCrop(overlay_button, corn_option, modal_submit_button);
 
-        
         /* Wait until tile is ready to harvest then click it. */
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);
         await harvestCrop(16, harvest_button, overlay_button);
@@ -437,8 +434,6 @@ describe('Parmbili testcase', function() {
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);
         await harvestCrop(15, harvest_button, overlay_button);
            
-        
-
         /* Expand the land to 5x5 and assert if the 25th tile exist. */
         await driver.findElement(By.id("expand_land_button")).click();
         await assertElement(".tile_item:nth-child(25)");

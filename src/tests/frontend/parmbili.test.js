@@ -349,7 +349,7 @@ describe('Parmbili testcase', function() {
     /**
     * DOCU: (Remove Crop) 10. Check if tile overlay "Remove" can be view. <br>
     * Expected test result: green
-    * Last updated at: January 17, 2023
+    * Last updated at: January 18, 2023
     * @author Noel
     */
     it('10. Allow user to view remove crop modal.', async function(){
@@ -374,19 +374,19 @@ describe('Parmbili testcase', function() {
     /**
     * DOCU: (Remove Crop) 11. Check if remove crop button in modal works. <br>
     * Expected test result: green
-    * Last updated at: January 17, 2023
+    * Last updated at: January 18, 2023
     * @author Noel
     */
-    it('11. Allow user to remove Crop', async function(){
+    it('11. Allow user to remove crop', async function(){
         /* Click remove button in modal */
         await driver.findElement(By.css(".modal-body .remove_button")).click();
         await assertNotPresentElement(".modal-body .remove_button");
     });
 
     /** 
-    * DOCU: (Expand Land button) 12. Check if expand land button is working. <br>
+    * DOCU: (Expand Land button) 12. Plant multiple crops. <br>
     * Expected test result: green
-    * Last updated at: January 17, 2023
+    * Last updated at: January 18, 2023
     * @author Noel
     */
     it('12. Allow user to plant multiple crops', async function(){
@@ -419,7 +419,7 @@ describe('Parmbili testcase', function() {
     /** 
     * DOCU: (Expand Land button) 13. Check if expand land button is working. <br>
     * Expected test result: green
-    * Last updated at: January 17, 2023
+    * Last updated at: January 18, 2023
     * @author Noel
     */
     it('13. Harvest multiple crops and expand land to 5 x 5.', async function(){

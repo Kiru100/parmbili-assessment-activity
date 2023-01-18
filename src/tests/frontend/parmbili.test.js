@@ -118,7 +118,7 @@ describe('Parmbili testcase', function() {
     it("1. Should be able to expand land, but it should not work because of insufficient fund.", async function (){
         /* Click expand land button and assert if 25th tile exist. */
         await driver.findElement(By.id("expand_land_button")).click();
-        await assertElement(".tile_item:nth-child(25)", 3000);
+        await assertElement(".tile_item:nth-child(25)", ASSERT_DURATION.faster);
     });
 
     /**
@@ -246,7 +246,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('8. Plants a crop.', async function(){   
+    it('8. Allow user to plant a crop.', async function(){   
         let planted_tile = ".tile_item.planted";
         let earning_value_text = "earning_value";
         let overlay_button = ".overlay_button";
@@ -287,7 +287,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('9. Harvest a crop.', async function(){    
+    it('9. Allow user to harvest a crop.', async function(){    
         let harvest_tile = ".tile_item.harvest";
         let tile_item = ".tile_item";
         let earning_value_text = "earning_value";
@@ -321,7 +321,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('10. Show remove crop modal.', async function(){
+    it('10. Allow user to view remove crop modal.', async function(){
         let modal_submit_button = ".action_container button[type=submit]";    
         let empty_tile = ".tile_item.empty";
         let planted_tile = ".tile_item.planted";
@@ -351,7 +351,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('11. Remove Crop', async function(){
+    it('11. Allow user to remove Crop', async function(){
         /* Click remove button in modal */
         await driver.findElement(By.css(".modal-body .remove_button")).click();
         await assertNotPresentElement(".modal-body .remove_button");
@@ -363,7 +363,7 @@ describe('Parmbili testcase', function() {
     * Last updated at: January 17, 2023
     * @author Noel
     */
-    it('12. Get rich and expand to land 5 x 5.', async function(){
+    it('12. Allow user to get enough money then expand land to 5 x 5.', async function(){
         let overlay_button = ".popover-body .overlay_button";
         let corn_option = ".modal-body .corn_icon";
         let modal_submit_button = ".modal-body .action_container button[type=submit]";

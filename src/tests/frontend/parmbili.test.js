@@ -408,7 +408,7 @@ describe('Parmbili testcase', function() {
         /* Wait until crop can be harvested */
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);
 
-        /* Wait until tile is ready to harvest then click it. */
+        /* Wait until tile is ready to harvest then harvest it. */
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);
         await harvestCrop(16, harvest_button, overlay_button);
 
@@ -420,11 +420,11 @@ describe('Parmbili testcase', function() {
         await assertElement(overlay_button);
         await plantCrop(overlay_button, corn_option, modal_submit_button);
 
-        /* Wait until tile is ready to harvest then click it. */
+        /* Wait until tile is ready to harvest then harvest it. */
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);
         await harvestCrop(16, harvest_button, overlay_button);
 
-        /* Wait until tile is ready to harvest then click it. */
+        /* Wait until tile is ready to harvest then harvest it. */
         await assertElement(harvest_tile, ASSERT_DURATION.slowest);
         await harvestCrop(15, harvest_button, overlay_button);
            

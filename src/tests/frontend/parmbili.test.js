@@ -376,7 +376,6 @@ describe('Parmbili testcase', function() {
         /* Click Empty tile (16th)*/
         await driver.findElement(By.css(".tile_item:nth-child(16)")).click();
         await assertElement(overlay_button);
-
         await plantCrop(overlay_button, corn_option, modal_submit_button);
         
         /* Wait until crop can be harvested */
